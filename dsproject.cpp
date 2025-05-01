@@ -44,3 +44,34 @@ class Taxi
             SetConsoleOutputCP(CP_UTF8);
             cout << " Taxi " << taxiID << " (" << driverName << ") has completed the service!" << endl;
         }
+        void showDetails() {
+            SetConsoleOutputCP(CP_UTF8);
+            cout << "\n---------------------------------------------" << endl;
+            cout << " Taxi ID: " << taxiID << endl;
+            cout << "‍✈️ Driver Name: " << driverName << endl;
+            cout << "🆔 Driver ID: " << driverID << endl;
+            cout << "🚗 Vehicle Number: " << vehicleNumber << endl;
+            cout << "📍 Drop Location: " << dropLocation << endl;
+            cout << "⏳ ETA: " << ETA << " minutes" << endl;
+            cout << "🚣️ Trip Distance: " << distance << " km" << endl;
+            cout << "➕ Additional Charges: Rs." << additionalCharges << endl;
+            cout << "---------------------------------------------" << endl;
+        }
+    };
+    
+    // Class for Passenger
+    class Passenger {
+    public:
+        string name;
+    
+        Passenger(string n) {
+            SetConsoleOutputCP(CP_UTF8);
+            name = n;
+            cout << " Passenger " << name << " entered the queue." << endl;
+        }
+    
+        ~Passenger() {
+            SetConsoleOutputCP(CP_UTF8);
+            cout << " Passenger " << name << " has been served." << endl;
+        }
+    };
