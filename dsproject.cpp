@@ -6,10 +6,12 @@
 #include<windows.h>
 using namespace std;
 
-bool compareIgnoreCase(string a, string b) {
+bool compareIgnoreCase(string a, string b) 
+{
     SetConsoleOutputCP(CP_UTF8);
     if (a.length() != b.length()) return false;
-    for (size_t i = 0; i < a.length(); i++) {
+    for (size_t i = 0; i < a.length(); i++) 
+    {
         if (tolower(a[i]) != tolower(b[i]))
             return false;
     }
@@ -26,25 +28,27 @@ class Taxi
         int ETA; // (Estimated time to arrival)
         float additionalCharges;
         float distance; // in km
-
-        Taxi(int id, string driver, int dID, string vehicle, string location, int eta, float charges, float dist) {
-            SetConsoleOutputCP(CP_UTF8);
-            taxiID = id;
-            driverName = driver;
-            driverID = dID;
-            vehicleNumber = vehicle;
-            dropLocation = location;
-            ETA = eta;
-            additionalCharges = charges;
-            distance = dist;
-            cout << " Taxi " << taxiID << " (" << driverName << ") is ready at the stand!" << endl;
-        }
+Taxi(int id, string driver, int dID, string vehicle, string location, int eta, float charges, float dist) 
+{
+        SetConsoleOutputCP(CP_UTF8);
+        taxiID = id;
+        driverName = driver;
+        driverID = dID;
+        vehicleNumber = vehicle;
+        dropLocation = location;
+        ETA = eta;
+        additionalCharges = charges;
+        distance = dist;
+        cout << " Taxi " << taxiID << " (" << driverName << ") is ready at the stand!" << endl;
+ }
     
-        ~Taxi() {
+    ~Taxi() 
+    {
             SetConsoleOutputCP(CP_UTF8);
             cout << " Taxi " << taxiID << " (" << driverName << ") has completed the service!" << endl;
-        }
-        void showDetails() {
+    }
+    void showDetails() 
+    {
             SetConsoleOutputCP(CP_UTF8);
             cout << "\n---------------------------------------------" << endl;
             cout << " Taxi ID: " << taxiID << endl;
@@ -58,19 +62,20 @@ class Taxi
             cout << "---------------------------------------------" << endl;
         }
     };
-    
-    // Class for Passenger
-    class Passenger {
+    class Passenger 
+   {
     public:
         string name;
     
-        Passenger(string n) {
+        Passenger(string n) 
+       {
             SetConsoleOutputCP(CP_UTF8);
             name = n;
-            cout << " Passenger " << name << " entered the queue." << endl;
+            cout << " Passenger " << name << " entered the stand." << endl;
         }
     
-        ~Passenger() {
+        ~Passenger() 
+       {
             SetConsoleOutputCP(CP_UTF8);
             cout << " Passenger " << name << " has been served." << endl;
         }
