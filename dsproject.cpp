@@ -47,8 +47,8 @@ Taxi(int id, string driver, int dID, string vehicle, string location, int eta, f
             SetConsoleOutputCP(CP_UTF8);
             cout << " Taxi " << taxiID << " (" << driverName << ") has completed the service!" << endl;
     }
-    void showDetails() 
-    {
+void showDetails() 
+{
             SetConsoleOutputCP(CP_UTF8);
             cout << "\n---------------------------------------------" << endl;
             cout << " Taxi ID: " << taxiID << endl;
@@ -62,8 +62,9 @@ Taxi(int id, string driver, int dID, string vehicle, string location, int eta, f
             cout << "---------------------------------------------" << endl;
         }
     };
-    class Passenger 
-   {
+    
+class Passenger 
+{
     public:
         string name;
     
@@ -79,4 +80,98 @@ Taxi(int id, string driver, int dID, string vehicle, string location, int eta, f
             SetConsoleOutputCP(CP_UTF8);
             cout << " Passenger " << name << " has been served." << endl;
         }
+};
+int main()
+{
+    SetConsoleOutputCP(CP_UTF8);
+    cout<<"\n*******************************************************"<<endl;
+    cout << "🚖 Welcome to QUICK RIDE Taxi Service 🚖" << endl;
+    cout<<"\n*******************************************************"<<endl;
+    cout << "📢 Passenger reached the stand.\n" << endl;
+    stack<int> taxiHistory;
+    
+    queue<Passenger> passengers;
+    passengers.push(Passenger("Amit"));
+    passengers.push(Passenger("Priya"));
+    Taxi taxis[5] = 
+    {
+        Taxi(1, "Lewis Hamilton", 101, "TS12AB0000", "Airport", 30, 100, 50.2),
+        Taxi(2, "max Verstappen", 102, "TS14CD5555", "Mall", 20, 30, 7.5),
+        Taxi(3, "Charles Leclercr", 103, "TS16EF9999", "Hotel Grand", 25, 60, 12.3),
+        Taxi(4, "George Russel", 104, "TS18GH1166", "Train Station", 15, 200, 5.8),
+        Taxi(5, "Michael Schumaker1", 105, "TS20IJ5588", "Downtown", 35, 70, 18.5)
     };
+    cout << "\n🚖 Available Drop Locations:" << endl;
+    for (int i = 0; i < 5; i++) 
+    {
+        cout << "📍 " << taxis[i].dropLocation << endl;
+    }
+    string userDropLocation;
+    cout << "\n👉 Enter your desired drop location: ";
+    getline(cin >> ws, userDropLocation);
+
+    bool foundTaxi = false;
+    int selectedTaxiIndex = -1;
+    for (int i = 0; i < 5; i++) 
+    {
+        if (compareIgnoreCase(userDropLocation, taxis[i].dropLocation)) 
+        {
+            foundTaxi = true;
+            selectedTaxiIndex = i;
+            break;
+        }
+    }
+    if (!foundTaxi) 
+    {
+        cout << "\n❌ Sorry, no taxi available for that location right now." << endl;
+        cout << "🚖 Please try again later." << endl;
+        return 0;
+    }
+    taxis[selectedTaxiIndex].showDetails();
+    taxiHistory.push(selectedTaxiIndex + 1);
+
+    float baseCostPerKm = 15;
+    float baseFare = taxis[selectedTaxiIndex].distance * baseCostPerKm;
+    float totalCost = baseFare + taxis[selectedTaxiIndex].additionalCharges;
+
+    cout << "\n💰 Fare Breakdown:" << endl;
+    cout << "Base Fare (" << taxis[selectedTaxiIndex].distance << " km × Rs." << baseCostPerKm << ") = Rs." << baseFare << endl;
+    cout << "Additional Charges = Rs." << taxis[selectedTaxiIndex].additionalCharges << endl;
+    cout << "---------------------------------------------" << endl;
+    cout << "✅ Total Payable Amount: Rs." << totalCost << endl;
+
+    int paymentChoice;
+    cout << "\n💳 Choose your Payment Method:" << endl;
+    cout << "1. Cash\n2. Card\n3. PhonePe\n4. Google Pay\n5. Paytm" << endl;
+    cout << "👉 Enter your choice: ";
+    cin >> paymentChoice;
+    switch (paymentChoice) 
+    {
+        case 1:
+            cout << "\n✅ Payment successful via Cash. Thank you!" << endl;
+            break;
+        case 2:
+            cout << "\n✅ Payment successful via Card. Thank you!" << endl;
+            break;
+        case 3:
+            cout << "\n✅ Payment successful via PhonePe. Thank you!" << endl;
+            break;
+        case 4:
+            cout << "\n✅ Payment successful via Google Pay. Thank you!" << endl;
+            break;
+        case 5:
+            cout << "\n✅ Payment successful via Paytm. Thank you!" << endl;
+            break;
+        default:
+            cout << "\n❌ Invalid payment method selected!" << endl;
+            return 0;
+    }
+    passengers.pop();
+
+    cout << "\n*************************************************" << endl;
+    cout << "🎉 Thank you for choosing QUICK RIDE Taxi Service! 🎉" << endl;
+    cout << "Have a Safe and Happy Journey! ✈️" << endl;
+    cout << "*************************************************\n" << endl;
+
+    return 0;
+}
